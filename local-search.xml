@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>树链剖分学习笔记</title>
+    <link href="/2024/07/13/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <url>/2024/07/13/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<p>注:本文结合了一些 <a href="https://www.luogu.com.cn/user/823814">Drest</a> 和 <a href="https://www.luogu.com.cn/user/555617">Targanzqq</a> 的笔记和讲解内容,在此感激不尽.</p><h2 id="0-一些前置芝士"><a href="#0-一些前置芝士" class="headerlink" title="0 一些前置芝士"></a>0 一些前置芝士</h2><ul><li>线段树</li></ul><h2 id="1-什么是树链剖分"><a href="#1-什么是树链剖分" class="headerlink" title="1 什么是树链剖分"></a>1 什么是树链剖分</h2><p>在大多数情况下,我们所说的”树链剖分”通常都是指的<strong>重链剖分</strong>.</p><p>众所周知,在处理序列问题上,我们有很多种方法,比如线段树,树状数组,平衡树……</p><p>那么,如何处理树上问题呢?</p><p>一种思路是将一棵树拍成一个序列(如dfs序),然后对序列进行操作.而树链剖分也运用了类似这样的思想.</p><p>树链剖分的大体思路就是把一棵树剖成若干条重链,然后根据性质用线段树(也可以用其他数据结构,如树状数组)维护.</p><h2 id="2-一些定义"><a href="#2-一些定义" class="headerlink" title="2 一些定义"></a>2 一些定义</h2><ul><li><p>重儿子:一个结点的所有儿子中子树结点最多(子树大小最大)的儿子</p></li><li><p>轻儿子:与重儿子相对而言,一个结点所有儿子除了重儿子之外的都是轻儿子</p></li><li><p>重边:一个结点与其重儿子所连的边</p></li><li><p>重链:由若干条重边连接起来的链</p></li></ul><p>同时,单个的轻儿子也可算作一条重链</p><p>如图,蓝色的节点就是重儿子.</p><p>图中有4条重链,分别是1-&gt;2-&gt;4-&gt;8 , 3-&gt;6 ,7和5.</p><p><img src="https://cdn.luogu.com.cn/upload/image_hosting/62t180in.png"></p><h2 id="3-一些性质"><a href="#3-一些性质" class="headerlink" title="3 一些性质"></a>3 一些性质</h2><p>树链剖分的实现十分依赖重链的性质,因为这牵扯到复杂度分析.  </p><p>树链剖分有两个最常用的性质,分别是:</p><ol><li><p>每一条重链的顶端一定是一个轻儿子</p></li><li><p>树上任意两点之间的唯一确定路径一定可以被分为不超过 $log n$ 条重链.</p></li></ol><p>下面分别证明这两个性质:</p><ol><li><p>假设存在一条重链,使得其顶端为重儿子,那么这个重儿子必然还有一条连向其父亲节点的重边,因此就不是重链的顶端,与题设矛盾.</p></li><li><p><del>待证</del></p></li></ol><p>在确定每个点的重儿子之后,我们对整棵树进行遍历,先遍历每个节点的重儿子,再遍历每个节点的轻儿子.</p><p>然后,我们根据遍历的顺却重新确定每个节点的编号,如下图.</p><p><img src="https://s2.loli.net/2024/07/13/yMDtiL1KBIgFucp.png"></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>test</title>
+    <link href="/2024/07/12/test/"/>
+    <url>/2024/07/12/test/</url>
+    
+    <content type="html"><![CDATA[<p>这是一篇测试博客<br>123456789<br>$114514$<br><em>1919810</em></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>

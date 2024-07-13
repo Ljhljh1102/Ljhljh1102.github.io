@@ -1,276 +1,407 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="1102">
+  <meta name="keywords" content="">
   
-  <title>1102&#39;s blogs</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+    <meta property="og:type" content="website">
 <meta property="og:title" content="1102&#39;s blogs">
 <meta property="og:url" content="http://example.com/index.html">
 <meta property="og:site_name" content="1102&#39;s blogs">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="1102">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="1102's blogs" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
+<meta name="twitter:card" content="summary_large_image">
   
   
   
-<link rel="stylesheet" href="/css/style.css">
+  <title>1102&#39;s blogs</title>
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
   
 <meta name="generator" content="Hexo 7.3.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">1102&#39;s blogs</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-          <a class="main-nav-link" href="/">Home</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
         
-      </nav>
-      <nav id="sub-nav">
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-树链剖分学习笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/07/13/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time class="dt-published" datetime="2024-07-13T03:25:36.000Z" itemprop="datePublished">2024-07-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/07/13/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">树链剖分学习笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>注:本文结合了一些 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/823814">Drest</a> 和 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/555617">Targanzqq</a> 的笔记和讲解内容,在此感激不尽.</p>
-<h2 id="0-一些前置芝士"><a href="#0-一些前置芝士" class="headerlink" title="0 一些前置芝士"></a>0 一些前置芝士</h2><ul>
-<li>线段树</li>
-</ul>
-<h2 id="1-什么是树链剖分"><a href="#1-什么是树链剖分" class="headerlink" title="1 什么是树链剖分"></a>1 什么是树链剖分</h2><p>在大多数情况下,我们所说的”树链剖分”通常都是指的<strong>重链剖分</strong>.</p>
-<p>众所周知,在处理序列问题上,我们有很多种方法,比如线段树,树状数组,平衡树……</p>
-<p>那么,如何处理树上问题呢?</p>
-<p>一种思路是将一棵树拍成一个序列(如dfs序),然后对序列进行操作.而树链剖分也运用了类似这样的思想.</p>
-<p>树链剖分的大体思路就是把一棵树剖成若干条重链,然后根据性质用线段树(也可以用其他数据结构,如树状数组)维护.</p>
-<h2 id="2-一些定义"><a href="#2-一些定义" class="headerlink" title="2 一些定义"></a>2 一些定义</h2><ul>
-<li><p>重儿子:一个结点的所有儿子中子树结点最多(子树大小最大)的儿子</p>
-</li>
-<li><p>轻儿子:与重儿子相对而言,一个结点所有儿子除了重儿子之外的都是轻儿子</p>
-</li>
-<li><p>重边:一个结点与其重儿子所连的边</p>
-</li>
-<li><p>重链:由若干条重边连接起来的链</p>
-</li>
-</ul>
-<p>同时,单个的轻儿子也可算作一条重链</p>
-<p>如图,蓝色的节点就是重儿子.</p>
-<p>图中有4条重链,分别是1-&gt;2-&gt;4-&gt;8 , 3-&gt;6 ,7和5.</p>
-<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/62t180in.png"></p>
-<h2 id="3-一些性质"><a href="#3-一些性质" class="headerlink" title="3 一些性质"></a>3 一些性质</h2><p>树链剖分的实现十分依赖重链的性质,因为这牵扯到复杂度分析.  </p>
-<p>树链剖分有两个最常用的性质,分别是:</p>
-<ol>
-<li><p>每一条重链的顶端一定是一个轻儿子</p>
-</li>
-<li><p>树上任意两点之间的唯一确定路径一定可以被分为不超过 $log n$ 条重链.</p>
-</li>
-</ol>
-<p>下面分别证明这两个性质:</p>
-<ol>
-<li><p>假设存在一条重链,使得其顶端为重儿子,那么这个重儿子必然还有一条连向其父亲节点的重边,因此就不是重链的顶端,与题设矛盾.</p>
-</li>
-<li><p><del>待证</del></p>
-</li>
-</ol>
-<p>在确定每个点的重儿子之后,我们对整棵树进行遍历,先遍历每个节点的重儿子,再遍历每个节点的轻儿子.</p>
-<p>然后,我们根据遍历的顺却重新确定每个节点的编号,如下图.</p>
-<p><img src="https://s2.loli.net/2024/07/13/yMDtiL1KBIgFucp.png" alt="2024-07-13_11-41.png"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/07/13/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="clyjn3klw0000kcx49mxc378e" data-title="树链剖分学习笔记" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-test" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/07/12/test/" class="article-date">
-  <time class="dt-published" datetime="2024-07-12T13:32:37.000Z" itemprop="datePublished">2024-07-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/07/12/test/">test</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>这是一篇测试博客<br>123456789<br>$114514$<br><em>1919810</em></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/07/12/test/" data-id="clyiqte090000fex4bslxcsko" data-title="test" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2024/07/13/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">树链剖分学习笔记</a>
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
           </li>
+          
         
-          <li>
-            <a href="/2024/07/12/test/">test</a>
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
     </div>
   </div>
+</nav>
 
   
-</aside>
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="An elegant Material-Design theme for Hexo"></span>
+          
+        </div>
+
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+
       
-      &copy; 2024 1102<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
     </div>
   </div>
-</footer>
+</div>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/13/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_self">
+          树链剖分学习笔记
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/13/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_self">
+        <div>
+          注:本文结合了一些 Drest 和 Targanzqq 的笔记和讲解内容,在此感激不尽. 0 一些前置芝士 线段树  1 什么是树链剖分在大多数情况下,我们所说的”树链剖分”通常都是指的重链剖分. 众所周知,在处理序列问题上,我们有很多种方法,比如线段树,树状数组,平衡树…… 那么,如何处理树上问题呢? 一种思路是将一棵树拍成一个序列(如dfs序),然后对序列进行操作.而树链剖分也运用了类似这样的
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-13 11:25" pubdate>
+              2024-07-13
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/12/test/" target="_self">
+          test
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/12/test/" target="_self">
+        <div>
+          这是一篇测试博客123456789$114514$1919810
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-12 21:32" pubdate>
+              2024-07-12
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     
 
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
 
-<script src="/js/script.js"></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-  </div>
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>
