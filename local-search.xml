@@ -12,18 +12,11 @@
     
     
     
-  </entry>
-  
-  
-  
-  <entry>
-    <title>test</title>
-    <link href="/2024/07/12/test/"/>
-    <url>/2024/07/12/test/</url>
-    
-    <content type="html"><![CDATA[<p>这是一篇测试博客<br>123456789<br>$114514$<br><em>1919810</em></p>]]></content>
-    
-    
+    <tags>
+      
+      <tag>算法</tag>
+      
+    </tags>
     
   </entry>
   
