@@ -16,21 +16,24 @@
   <meta name="author" content="1102">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言 这篇鲜花没有编号。 正文 事实上这一篇的起因是，看见周围的人都在写外培的各种游记，毕竟发生在他们身上确实是有很多有趣的事情。因而导致了我也想写一篇类似性质的文章。但是进一步想一下，发生在我身上的事情无非也就是每天模拟赛，抱怨，做题，吃饭，睡觉。好像也没什么写头。但是集训之后确实是有相当多的感想，尤其是个人对OI的一些拙见，也许就在这里写一下。 最开始我对自己OI的规划，也就是去年（24年）要">
+    <meta name="description" content="-1 前言 最近一直在研究树形数据结构，最后发现自己大概就能学明白一个线段树和一个树状数组。于是这次先来写一些线段树相关的东西。像是“平衡树漫谈”或者是“树形数据结构漫谈”的这种东西可能要一段时间以后了。 0 前置芝士 作为教程性质的文章为什么需要有前置芝士  线段树（最基础的） 树状数组（点修区间查） 其他的好像不需要了  2 线段树&amp;树状数组基础 线段树，可能是OIer圈子中流传度最广">
 <meta property="og:type" content="article">
-<meta property="og:title" content="写在xx之后">
-<meta property="og:url" content="http://example.com/2025/08/01/%E5%86%99%E5%9C%A8xx%E4%B9%8B%E5%90%8E/index.html">
+<meta property="og:title" content="线段树漫谈">
+<meta property="og:url" content="http://example.com/2025/08/08/%E7%BA%BF%E6%AE%B5%E6%A0%91%E6%BC%AB%E8%B0%88/index.html">
 <meta property="og:site_name" content="1102&#39;s blogs">
-<meta property="og:description" content="前言 这篇鲜花没有编号。 正文 事实上这一篇的起因是，看见周围的人都在写外培的各种游记，毕竟发生在他们身上确实是有很多有趣的事情。因而导致了我也想写一篇类似性质的文章。但是进一步想一下，发生在我身上的事情无非也就是每天模拟赛，抱怨，做题，吃饭，睡觉。好像也没什么写头。但是集训之后确实是有相当多的感想，尤其是个人对OI的一些拙见，也许就在这里写一下。 最开始我对自己OI的规划，也就是去年（24年）要">
+<meta property="og:description" content="-1 前言 最近一直在研究树形数据结构，最后发现自己大概就能学明白一个线段树和一个树状数组。于是这次先来写一些线段树相关的东西。像是“平衡树漫谈”或者是“树形数据结构漫谈”的这种东西可能要一段时间以后了。 0 前置芝士 作为教程性质的文章为什么需要有前置芝士  线段树（最基础的） 树状数组（点修区间查） 其他的好像不需要了  2 线段树&amp;树状数组基础 线段树，可能是OIer圈子中流传度最广">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-08-01T06:22:27.000Z">
-<meta property="article:modified_time" content="2025-08-01T12:17:52.270Z">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/5ciboib6.png">
+<meta property="article:published_time" content="2025-08-08T09:14:15.000Z">
+<meta property="article:modified_time" content="2025-08-09T06:28:04.903Z">
 <meta property="article:author" content="1102">
+<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.luogu.com.cn/upload/image_hosting/5ciboib6.png">
   
   
   
-  <title>写在xx之后 - 1102&#39;s blogs</title>
+  <title>线段树漫谈 - 1102&#39;s blogs</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="写在xx之后"></span>
+            <span id="subtitle" data-typed-text="线段树漫谈"></span>
           
         </div>
 
@@ -209,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-08-01 14:22" pubdate>
-          2025年8月1日 下午
+        <time datetime="2025-08-08 17:14" pubdate>
+          2025年8月8日 下午
         </time>
       </span>
     
@@ -221,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          476 字
         
       </span>
     
@@ -232,7 +235,7 @@
         
         
         
-          13 分钟
+          4 分钟
         
       </span>
     
@@ -273,30 +276,48 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">写在xx之后</h1>
+            <h1 id="seo-header">线段树漫谈</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="前言">前言</h2>
-<p>这篇鲜花没有编号。</p>
-<h2 id="正文">正文</h2>
-<p>事实上这一篇的起因是，看见周围的人都在写外培的各种游记，毕竟发生在他们身上确实是有很多有趣的事情。因而导致了我也想写一篇类似性质的文章。但是进一步想一下，发生在我身上的事情无非也就是每天模拟赛，抱怨，做题，吃饭，睡觉。好像也没什么写头。但是集训之后确实是有相当多的感想，尤其是个人对OI的一些拙见，也许就在这里写一下。</p>
-<p>最开始我对自己OI的规划，也就是去年（24年）要尽力拿到提高省一。但是到了临阵的时候，最终还是心里撑不住，安慰自己二等也可以。最后也大概是应了自己的猜想，拿了二等。然而这最主要的原因是T2没能场切，最可惜的莫过于是当时想出了正解但是由于代码能力过差，加上实在是一点没有手感，因而浪费了非常长的时间，也在一定程度上影响了T3,4。总的说是很可惜，但是可惜之中又仿佛是一种必然，这必然就是我长年累月口胡题的后果，重思维而轻代码，最终不但思维不出众，代码还拖后腿。</p>
-<p>当时是十月末，过了一段时间大概是十一月末，到了NOIP的时间。由于我稀碎的分数，自然是去不成NOIP的（实际好像就算场切T2也还差几分）。因此只能看着高中的同学们去。当时我在场外看着题，觉得我没去或许是个正确——因为去了可能真的拿不了几分。我现在的水平也许都不一定能够迅速切出前两题，换在当时也许就四个题各拼各的暴力分了。这也印证出我当时足够可怜的一点点水平。</p>
-<p>后来NOIP出分，大家分数的分布格局跟CSP又是截然不同——当然，这跟我关系也许不大。这时间我似乎就是认识到了自己的真实水平，因而逐渐对某些东西产生了些厌恶，然而更准确是畏惧的情绪。后来就是25年上半年，再往后就到了现在。这是过去的事情。</p>
-<p>因而你是否现在可以说一些未来的事情呢？我想不能。你知道未来是怎么样的吗？你知道今年NOIP你能做出来几道题吗？你知道明年你能不能进省队吗？你不知道，在那到来之前你注定也不可能知道。这自然相当悲哀，然而好的一点是——这些都由你自己创造，你好歹还保留了一点最自己人生的控制权。</p>
-<p>大概也就是去年年底吧，相当多方面的共同作用下，我生出了一种极为悲观的估计：在这么一个几乎没有竞赛环境的地方，加上几乎没有任何的竞赛政策支持，也许到了高中打打NOIP，混个省一就该退役了。甚至到现在我也不能说这种估计是错误的，恰恰相反，这种估计是极为理性的。近几年来我接触的许许多多tayz的学长们的竞赛经历几乎都在说明这个事实。况且我的家长不支持停课，我当时也没有足够的勇气，以及意志力薄弱的众多情况下，也就顺理成章的接受了这个所谓“事实”。</p>
-<p>事实上，SD是我认为一个相当特殊的省份。说这是一个竞赛强省，无论是从奖牌的数量还是竞争压力都比不上诸如ZJ，GD等省份。但是要想进省队乃至打NOI的难度却是远超如LN，JL这种省份。加上13个A，B类名额很轻易就被几个强校垄断，甚至加上近几年省内有更多更有天赋的，或许被称之为“天才”的出现，和各大竞赛强校的竞争和发展，在这样一个昔日的竞赛强校，今日竞赛环境几乎没有的地方想要进省队，乃至NOI，可以预见的是难度的持续增大。</p>
-<p>以上这些都是我所想的。然后呢？</p>
-<p>事情的转机最早出现在今年联合省选。zqq去参加了。直到当时，我才感受到我离省选如此之近。zqq说他切了d1t1，后面的题是两道黑，但是据说也可以拼暴力。d2t1依旧是一道蓝，据zqq说他在场上能打出来60pts，后面还是两道黑。其时我就想：假若我有一天能站到省选赛场上，我是否有那么万分之一的可能能出现奇迹呢？</p>
-<p>我不知道，在那到来之前我注定也不可能知道。</p>
-<p>再后来，除去因为学考而忙于whk的时间，就是后来来到外培。实际上每一次外培我觉得都能，或者说是已经改变了我很多东西。以及一些其他举足轻重的事情，这里不便于展开。</p>
-<p>对于我，现在想一想，为什么畏惧？实际上没有答案，这是一个错误的问题。硬要说一个就是还有所保留，有所顾忌。但是，如果当时的ljh回头想一想，自己真的还有什么可以顾忌的吗？当他发现自己一无所有，那就是现在的ljh了。</p>
-<p>因此，还有三年。</p>
-<p>以上是我作为一个平凡的OIer的坐井观天式的一点拙见，但也是我的心里所想。</p>
-<p>至于标题，最开始是“写在外培之后”，后来想一想这到底是写在什么之后？我也弄不清了。故以“xx”代之，心里所想的东西，这就是写在这之后的东西。</p>
-<p>2025.8.1 于北京人大附中亦庄新城学校。</p>
+                <h2 id="1-前言">-1 前言</h2>
+<p>最近一直在研究树形数据结构，最后发现自己大概就能学明白一个线段树和一个树状数组。于是这次先来写一些线段树相关的东西。像是“平衡树漫谈”或者是“树形数据结构漫谈”的这种东西可能要一段时间以后了。</p>
+<h2 id="0-前置芝士">0 前置芝士</h2>
+<p><s>作为教程性质的文章为什么需要有前置芝士</s></p>
+<ul>
+<li>线段树（最基础的）</li>
+<li>树状数组（点修区间查）</li>
+<li><s>其他的好像不需要了</s></li>
+</ul>
+<h3 id="2-线段树-树状数组基础">2 线段树&amp;树状数组基础</h3>
+<p>线段树，可能是OIer圈子中流传度最广，热度最高，最受人喜爱<s>以及受迫害最多</s>的数据结构。如下图：</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/5ciboib6.png" srcset="/img/loading.gif" lazyload alt="我有线段树症"></p>
+<p><s>我有线段树症</s></p>
+<p>那么这里默认大家已经通过了<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3374">洛谷P3374 【模板】树状数组1</a>和<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3372">洛谷P3372 【模板】线段树1</a>，也就是掌握了线段树和树状数组最基础的芝士。那么可以继续阅读下文。</p>
+<h3 id="2-1-线段树">2.1 线段树</h3>
+<p>线段树，其本身最关键的几个要素就是：结构，懒标记<s>和科技</s>。</p>
+<p>先说结构。</p>
+<p>线段树的本质是一颗二叉树，其每个节点都代表一个区间。并且其高度总维持在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>log</mi><mo>⁡</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> 级别，这是其能保证时间复杂度正确的关键所在。</p>
+<p>性质：</p>
+<h2 id="3-线段树-树状数组基础应用">3 线段树&amp;树状数组基础应用</h2>
+<h3 id="3-1-CDQ分治">3.1 CDQ分治</h3>
+<h3 id="3-2-扫描线">3.2 扫描线</h3>
+<h2 id="4-线段树进阶">4 线段树进阶</h2>
+<h3 id="4-1-线段树分治">4.1 线段树分治</h3>
+<h3 id="4-2-线段树二分">4.2 线段树二分</h3>
+<h3 id="4-3-线段树合并">4.3 线段树合并</h3>
+<h3 id="4-4-线段树分裂">4.4 线段树分裂</h3>
+<h2 id="5-进阶线段树">5 进阶线段树</h2>
+<h3 id="5-1-可持久化线段树">5.1 可持久化线段树</h3>
+<h4 id="5-1-1-可持久化线段树基础">5.1.1 可持久化线段树基础</h4>
+<h4 id="5-1-2-标记永久化">5.1.2 标记永久化</h4>
+<h3 id="5-2-可持久化权值线段树">5.2 可持久化权值线段树</h3>
+<h3 id="5-3-李超线段树">5.3 李超线段树</h3>
+<h3 id="5-4-非递归式线段树（zkw线段树）">5.4 非递归式线段树（zkw线段树）</h3>
+<h4 id="5-4-1-线段树与01Trie">5.4.1 线段树与01Trie</h4>
+<h4 id="5-4-2-zkw线段树">5.4.2 zkw线段树</h4>
+<h2 id="6-后记">6 后记</h2>
 
                 
               </div>
@@ -306,6 +327,13 @@
               <div class="post-metas my-3">
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="print-no-link">#数据结构</a>
+      
+    </div>
+  
 </div>
 
 
@@ -314,8 +342,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>写在xx之后</div>
-      <div>http://example.com/2025/08/01/写在xx之后/</div>
+      <div>线段树漫谈</div>
+      <div>http://example.com/2025/08/08/线段树漫谈/</div>
     </div>
     <div class="license-meta">
       
@@ -327,7 +355,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年8月1日</div>
+          <div>2025年8月8日</div>
         </div>
       
       
@@ -359,9 +387,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/08/08/%E7%BA%BF%E6%AE%B5%E6%A0%91%E6%BC%AB%E8%B0%88/" title="线段树漫谈">
+                      <a href="/2025/08/25/P11362%E3%80%90NOIP2024%E3%80%91%E9%81%97%E5%A4%B1%E7%9A%84%E8%B5%8B%E5%80%BC-assign-%E9%A2%98%E8%A7%A3/" title="P11362【NOIP2024】遗失的赋值(assign) 题解">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">线段树漫谈</span>
+                        <span class="hidden-mobile">P11362【NOIP2024】遗失的赋值(assign) 题解</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -369,8 +397,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/07/30/P3267%E9%A2%98%E8%A7%A3/" title="P3267题解">
-                        <span class="hidden-mobile">P3267题解</span>
+                      <a href="/2025/08/01/%E5%86%99%E5%9C%A8xx%E4%B9%8B%E5%90%8E/" title="写在xx之后">
+                        <span class="hidden-mobile">写在xx之后</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
