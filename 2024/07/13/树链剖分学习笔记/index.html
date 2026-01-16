@@ -1,0 +1,798 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="1102">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="注:本文结合了一些 Drest 和 Targanzqq 的笔记和讲解内容,在此感激不尽. 0 一些前置芝士  线段树  1 什么是树链剖分 在大多数情况下,我们所说的&quot;树链剖分&quot;通常都是指的重链剖分. 众所周知,在处理序列问题上,我们有很多种方法,比如线段树,树状数组,平衡树… 那么,如何处理树上问题呢? 一种思路是将一棵树拍成一个序列(如dfs序),然后对序列进行操作.而树链">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树链剖分学习笔记">
+<meta property="og:url" content="http://ljhljh1102,github.io/2024/07/13/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="1102&#39;s blogs">
+<meta property="og:description" content="注:本文结合了一些 Drest 和 Targanzqq 的笔记和讲解内容,在此感激不尽. 0 一些前置芝士  线段树  1 什么是树链剖分 在大多数情况下,我们所说的&quot;树链剖分&quot;通常都是指的重链剖分. 众所周知,在处理序列问题上,我们有很多种方法,比如线段树,树状数组,平衡树… 那么,如何处理树上问题呢? 一种思路是将一棵树拍成一个序列(如dfs序),然后对序列进行操作.而树链">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/62t180in.png">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/kyx5onxq.png">
+<meta property="article:published_time" content="2024-07-13T03:25:36.000Z">
+<meta property="article:modified_time" content="2025-05-17T07:57:57.165Z">
+<meta property="article:author" content="1102">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.luogu.com.cn/upload/image_hosting/62t180in.png">
+  
+  
+  
+  <title>树链剖分学习笔记 - 1102&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"ljhljh1102,github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 90vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>1102&#39;s blogs</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.luogu.com.cn/upload/image_hosting/rvo9r419.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="树链剖分学习笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-13 11:25" pubdate>
+          2024年7月13日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">树链剖分学习笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>注:本文结合了一些 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/823814">Drest</a> 和 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/555617">Targanzqq</a> 的笔记和讲解内容,在此感激不尽.</p>
+<h2 id="0-一些前置芝士">0 一些前置芝士</h2>
+<ul>
+<li>线段树</li>
+</ul>
+<h2 id="1-什么是树链剖分">1 什么是树链剖分</h2>
+<p>在大多数情况下,我们所说的&quot;树链剖分&quot;通常都是指的<strong>重链剖分</strong>.</p>
+<p>众所周知,在处理序列问题上,我们有很多种方法,比如线段树,树状数组,平衡树…</p>
+<p>那么,如何处理树上问题呢?</p>
+<p>一种思路是将一棵树拍成一个序列(如dfs序),然后对序列进行操作.而树链剖分也运用了类似这样的思想.</p>
+<p>树链剖分的大体思路就是把一棵树剖成若干条重链,然后根据性质用线段树(也可以用其他数据结构,如树状数组)维护.</p>
+<h2 id="2-一些定义">2 一些定义</h2>
+<ul>
+<li>
+<p>重儿子:一个结点的所有儿子中子树结点最多(子树大小最大)的儿子</p>
+</li>
+<li>
+<p>轻儿子:与重儿子相对而言,一个结点所有儿子除了重儿子之外的都是轻儿子</p>
+</li>
+<li>
+<p>重边:一个结点与其重儿子所连的边</p>
+</li>
+<li>
+<p>重链:由若干条重边连接起来的链</p>
+</li>
+</ul>
+<p>同时,单个的轻儿子也可算作一条重链</p>
+<p>如图,蓝色的节点就是重儿子.</p>
+<p>图中有4条重链,分别是1-&gt;2-&gt;4-&gt;8 , 3-&gt;6 ,7和5.</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/62t180in.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="3-一些性质">3 一些性质</h2>
+<p>树链剖分的实现十分依赖重链的性质,因为这牵扯到复杂度分析.</p>
+<p>树链剖分有两个最常用的性质,分别是:</p>
+<ol>
+<li>
+<p>每条重链的顶端一定是一个轻儿子</p>
+</li>
+<li>
+<p>每个轻儿子一定是一条重链的顶端</p>
+</li>
+<li>
+<p>树上任意两点之间的唯一确定路径一定可以被分为不超过 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>log</mi><mo>⁡</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span></span></span></span> 条重链.</p>
+</li>
+</ol>
+<p>下面分别证明这两个性质:</p>
+<ol>
+<li>
+<p>假设存在一条重链,使得其顶端为重儿子,那么这个重儿子必然还有一条连向其父亲节点的重边,因此就不是重链的顶端,与题设矛盾,所以每条重链的顶端一定是一个轻儿子.</p>
+</li>
+<li>
+<p>假设存在一个轻儿子,使得这个轻儿子不是一条重链的顶端,那么其父亲节点一定有一条重链连向这个轻儿子,所以这个节点是重儿子,与题设矛盾,所以一个轻儿子一定是一条重链的顶端.</p>
+</li>
+<li>
+<p><s>待证</s></p>
+</li>
+</ol>
+<p>在确定每个点的重儿子之后,我们对整棵树进行遍历,先遍历每个节点的重儿子,再遍历每个节点的轻儿子.</p>
+<p>然后,我们根据遍历的顺却重新确定每个节点的编号,如下图.</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/kyx5onxq.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>然后,我们惊奇的发现了这个编号的两个性质:</p>
+<ol>
+<li>
+<p>任意一条重链上的所有节点编号是连续的</p>
+</li>
+<li>
+<p>任意一个子树内的所有节点编号是连续的</p>
+</li>
+</ol>
+<p>由于这两个性质,我们可以将这棵树按照这个编号拍成一个序列,然后用数据结构维护这个序列,使得实现我们想要的功能.</p>
+<h2 id="4-如何实现">4 如何实现</h2>
+<p>注: 下面的所有内容均以树链剖分模板题 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3384">P3384</a> 为例</p>
+<p>上面的部分都是理论基础,下面我们来讲讲如何代码实现.</p>
+<p>大体的思路是先处理出来这棵树的各种信息,然后转化为序列再用数据结构(这里采用线段树)维护.</p>
+<h3 id="4-0-线段树">4.0 线段树</h3>
+<p>线段树代码如下:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//写的很难看的线段树</span><br><span class="hljs-type">int</span> tree[N*<span class="hljs-number">4</span>];<br><span class="hljs-type">int</span> tag[N*<span class="hljs-number">4</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pushup</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span></span>&#123;<br>    tree[u]=tree[u*<span class="hljs-number">2</span>]+tree[u*<span class="hljs-number">2</span><span class="hljs-number">+1</span>];<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> now,<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(l==r)&#123;tree[now]=val[l];<span class="hljs-keyword">return</span>;&#125;<br>    <span class="hljs-type">int</span> mid=l+r&gt;&gt;<span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">build</span>(now*<span class="hljs-number">2</span>,l,mid);<br>    <span class="hljs-built_in">build</span>(now*<span class="hljs-number">2</span><span class="hljs-number">+1</span>,mid<span class="hljs-number">+1</span>,r);<br>    <span class="hljs-built_in">pushup</span>(now);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">change</span><span class="hljs-params">(<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> len,<span class="hljs-type">int</span> val)</span></span>&#123;<br>    tag[x]+=val;<br>    tree[x]+=len*val;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pushdown</span><span class="hljs-params">(<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)</span></span>&#123;<br>    <span class="hljs-type">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">change</span>(x*<span class="hljs-number">2</span>,mid-l<span class="hljs-number">+1</span>,tag[x]);<br>    <span class="hljs-built_in">change</span>(x*<span class="hljs-number">2</span><span class="hljs-number">+1</span>,r-mid,tag[x]);<br>    tag[x]=<span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">update</span><span class="hljs-params">(<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> left,<span class="hljs-type">int</span> right,<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r,<span class="hljs-type">int</span> val)</span></span>&#123;<span class="hljs-comment">//线段树修改</span><br>    <span class="hljs-keyword">if</span>(l&lt;=left&amp;&amp;right&lt;=r)&#123;      <br>        <span class="hljs-built_in">change</span>(x,right-left<span class="hljs-number">+1</span>,val);<br>    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(!(r&lt;left||right&lt;l))&#123;<br>        <span class="hljs-type">int</span> mid=(left+right)&gt;&gt;<span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">pushdown</span>(x,left,right);<br>        <span class="hljs-built_in">update</span>(x*<span class="hljs-number">2</span>,left,mid,l,r,val);<br>        <span class="hljs-built_in">update</span>(x*<span class="hljs-number">2</span><span class="hljs-number">+1</span>,mid<span class="hljs-number">+1</span>,right,l,r,val);<br>        <span class="hljs-built_in">pushup</span>(x);<br>    &#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> left,<span class="hljs-type">int</span> right,<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)</span></span>&#123;<span class="hljs-comment">//线段树查询</span><br>    <span class="hljs-keyword">if</span>(l&lt;=left&amp;&amp;right&lt;=r)&#123;<br>        <span class="hljs-keyword">return</span> tree[x];<br>    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(!(r&lt;left||l&gt;right))&#123;<br>        <span class="hljs-type">int</span> mid=(left+right)&gt;&gt;<span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">pushdown</span>(x,left,right);<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">query</span>(x*<span class="hljs-number">2</span>,left,mid,l,r)+<span class="hljs-built_in">query</span>(x*<span class="hljs-number">2</span><span class="hljs-number">+1</span>,mid<span class="hljs-number">+1</span>,right,l,r);<br>    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="4-1-预处理信息">4.1 预处理信息</h3>
+<p>首先,我们需要通过两次dfs来处理下列信息:</p>
+<ol>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>e</mi><mi>e</mi><msub><mi>p</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">deep_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">ee</span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> :表示i在树中的深度</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mi>i</mi><msub><mi>z</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">siz_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8095em;vertical-align:-0.15em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">i</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> :表示i的子树大小</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><msub><mi>a</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">fa_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> :表示i的父亲节点</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mi>o</mi><msub><mi>n</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">son_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord mathnormal">so</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> :表示i的重儿子</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mi>o</mi><msub><mi>p</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">top_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8095em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">t</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> :表示i所在重链的顶端</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><msub><mi>d</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">id_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord mathnormal">i</span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> :表示i节点的新编号</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><msub><mi>l</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">val_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">a</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0197em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> :表示重新编号后的i的节点的值,令 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">v_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 表示重新编号前的i的节点的值,则有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><msub><mi>l</mi><mi>i</mi></msub><mo>=</mo><msub><mi>v</mi><mrow><mi>i</mi><msub><mi>d</mi><mi>i</mi></msub></mrow></msub></mrow><annotation encoding="application/x-tex">val_i=v_{id_i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">a</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0197em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6807em;vertical-align:-0.2501em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3281em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2501em;"><span></span></span></span></span></span></span></span></span></span></p>
+</li>
+</ol>
+<p>第一次dfs处理前4个信息,可以直接通过记录 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>f</mi><mi>s</mi><mo stretchy="false">(</mo><mi>n</mi><mi>o</mi><mi>w</mi><mo separator="true">,</mo><mi>f</mi><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">dfs(now,fa)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">df</span><span class="mord mathnormal">s</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">a</span><span class="mclose">)</span></span></span></span> 来处理这4个信息.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs0</span><span class="hljs-params">(<span class="hljs-type">int</span> now,<span class="hljs-type">int</span> father)</span></span>&#123;<br>    deep[now]=deep[father]<span class="hljs-number">+1</span>;<br>    fa[now]=father;<br>    siz[now]=<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> &amp;i:g[now])&#123;<br>        <span class="hljs-keyword">if</span>(i==father)<span class="hljs-keyword">continue</span>;<br>        <span class="hljs-built_in">dfs0</span>(i,now);<br>        siz[now]+=siz[i];<br>        <span class="hljs-keyword">if</span>(siz[i]&gt;siz[son[now]])son[now]=i;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>第二次dfs处理后3个信息,我们可以通过记录当前点和当前点所在重链的顶端来进行dfs.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs1</span><span class="hljs-params">(<span class="hljs-type">int</span> now,<span class="hljs-type">int</span> tp)</span></span>&#123;<br>    top[now]=tp;<br>    id[now]=++cnt,val[id[now]]=v[now];<span class="hljs-comment">//分配新的编号并且记录值</span><br>    <span class="hljs-keyword">if</span>(son[now]==<span class="hljs-number">0</span>)&#123;<br>        <span class="hljs-keyword">return</span>;<span class="hljs-comment">//若无重儿子则返回</span><br>    &#125;<br>    <span class="hljs-built_in">dfs1</span>(son[now],tp);<span class="hljs-comment">//先遍历重儿子</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> &amp;i:g[now])&#123;<br>        <span class="hljs-keyword">if</span>(i==fa[now]||i==son[now])<span class="hljs-keyword">continue</span>;<br>        <span class="hljs-built_in">dfs1</span>(i,i);<span class="hljs-comment">//再遍历轻儿子</span><br>        <span class="hljs-comment">//由于轻儿子一定是一个重链的顶端,所以遍历轻儿子时,其所在重链顶端就是它本身.</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>处理完信息后,我们就可以开始考虑如何维护这四种操作:</p>
+<ul>
+<li>
+<p><code>1 x y z</code>，表示将树从 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> 到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span> 结点最短路径上所有节点的值都加上 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span></span></span></span>。</p>
+</li>
+<li>
+<p><code>2 x y</code>，表示求树从 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> 到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span> 结点最短路径上所有节点的值之和。</p>
+</li>
+<li>
+<p><code>3 x z</code>，表示将以 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> 为根节点的子树内所有节点值都加上 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span></span></span></span>。</p>
+</li>
+<li>
+<p><code>4 x</code> 表示求以 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> 为根节点的子树内所有节点值之和</p>
+</li>
+</ul>
+<p>也就是维护路径和,路径修改,子树和与子树修改.</p>
+<h3 id="4-2-路径操作">4.2 路径操作</h3>
+<p>以查询操作为例,当 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo separator="true">,</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">u,v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">u</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span></span> 两点不在一条重链上时,我们要将两个点都跳到一条重链上,并且由于每条重链上的点的编号都是连续的,我们可以直接记录每条跳过的重链的值的和.</p>
+<p>当两个点到一条重链上时,可以直接记录两点之间的值的和.</p>
+<p>修改操作同理,将代码中的记录操作改成修改操作即可.</p>
+<p>示例代码如下:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">querypath</span><span class="hljs-params">(<span class="hljs-type">int</span> u,<span class="hljs-type">int</span> v)</span></span>&#123;<span class="hljs-comment">//路径查询</span><br>    <span class="hljs-type">int</span> ret=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span>(top[u]!=top[v])&#123;<br>        <span class="hljs-keyword">if</span>(deep[top[u]]&lt;deep[top[v]])<span class="hljs-built_in">swap</span>(u,v);<br>        ret=ret+<span class="hljs-built_in">query</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,cnt,id[top[u]],id[u]);<br>        u=fa[top[u]]; <br>    &#125;<br>    <span class="hljs-keyword">if</span>(deep[u]&lt;deep[v])<span class="hljs-built_in">swap</span>(u,v);<br>    ret=ret+<span class="hljs-built_in">query</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,cnt,id[v],id[u]);<br>    <span class="hljs-keyword">return</span> ret;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">updatepath</span><span class="hljs-params">(<span class="hljs-type">int</span> u,<span class="hljs-type">int</span> v,<span class="hljs-type">int</span> k)</span></span>&#123;<span class="hljs-comment">//路径修改</span><br>    <span class="hljs-keyword">while</span>(top[u]!=top[v])&#123;<br>        <span class="hljs-keyword">if</span>(deep[top[u]]&lt;deep[top[v]])<span class="hljs-built_in">swap</span>(u,v);<br>        <span class="hljs-built_in">update</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,cnt,id[top[u]],id[u],k);<br>        u=fa[top[u]];<br>    &#125;<br>    <span class="hljs-keyword">if</span>(deep[u]&lt;deep[v])<span class="hljs-built_in">swap</span>(u,v);<br>    <span class="hljs-built_in">update</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,cnt,id[v],id[u],k);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="4-3-子树操作">4.3 子树操作</h3>
+<p>子树操作相对而言简单很多.</p>
+<p>由于每个子树在序列中都是连续的,长度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mi>i</mi><msub><mi>z</mi><mi>i</mi></msub><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">siz_i-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8095em;vertical-align:-0.15em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">i</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>的一段,我们可以直接进行操作.</p>
+<p>代码如下:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">querytree</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span></span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">query</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,cnt,id[u],id[u]+siz[u]<span class="hljs-number">-1</span>);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">updatetree</span><span class="hljs-params">(<span class="hljs-type">int</span> u,<span class="hljs-type">int</span> k)</span></span>&#123;<br>    <span class="hljs-built_in">update</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,cnt,id[u],id[u]+siz[u]<span class="hljs-number">-1</span>,k);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="4-4-主函数部分">4.4 主函数部分:</h3>
+<p>主函数就非常简单了.</p>
+<p>代码如下:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    n=<span class="hljs-built_in">read</span>(),m=<span class="hljs-built_in">read</span>(),r=<span class="hljs-built_in">read</span>(),p=<span class="hljs-built_in">read</span>();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)&#123;v[i]=<span class="hljs-built_in">read</span>();&#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;n;++i)&#123;<br>        <span class="hljs-type">int</span> u=<span class="hljs-built_in">read</span>(),v=<span class="hljs-built_in">read</span>();<br>        g[u].<span class="hljs-built_in">push_back</span>(v);<br>        g[v].<span class="hljs-built_in">push_back</span>(u);<br>    &#125;<br>    <span class="hljs-built_in">dfs0</span>(r,<span class="hljs-number">0</span>);<br>    <span class="hljs-built_in">dfs1</span>(r,r);<br>    <span class="hljs-built_in">build</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,n);<br>    <span class="hljs-keyword">while</span>(m--)&#123;<br>        <span class="hljs-type">int</span> op=<span class="hljs-built_in">read</span>();<br>        <span class="hljs-keyword">if</span>(op==<span class="hljs-number">1</span>)&#123;<br>            <span class="hljs-type">int</span> x=<span class="hljs-built_in">read</span>(),y=<span class="hljs-built_in">read</span>(),z=<span class="hljs-built_in">read</span>();<br>            <span class="hljs-built_in">updatepath</span>(x,y,z);<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(op==<span class="hljs-number">2</span>)&#123;<br>            <span class="hljs-type">int</span> x=<span class="hljs-built_in">read</span>(),y=<span class="hljs-built_in">read</span>();  <br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,<span class="hljs-built_in">querypath</span>(x,y)%p);<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(op==<span class="hljs-number">3</span>)&#123;<br>            <span class="hljs-type">int</span> x=<span class="hljs-built_in">read</span>(),z=<span class="hljs-built_in">read</span>();<br>            <span class="hljs-built_in">updatetree</span>(x,z);<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-type">int</span> x=<span class="hljs-built_in">read</span>();<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,<span class="hljs-built_in">querytree</span>(x)%p);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="4-5-完整代码">4.5 完整代码</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">read</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> f=<span class="hljs-number">1</span>,s=<span class="hljs-number">0</span>;<span class="hljs-type">char</span> c=<span class="hljs-built_in">getchar</span>();<br>    <span class="hljs-keyword">while</span>(c&lt;<span class="hljs-string">&#x27;0&#x27;</span>||c&gt;<span class="hljs-string">&#x27;9&#x27;</span>)&#123;<span class="hljs-keyword">if</span>(c==<span class="hljs-string">&#x27;-&#x27;</span>)f=<span class="hljs-number">-1</span>;c=<span class="hljs-built_in">getchar</span>();&#125;<br>    <span class="hljs-keyword">while</span>(c&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;c&lt;=<span class="hljs-string">&#x27;9&#x27;</span>)&#123;s=(s&lt;&lt;<span class="hljs-number">1</span>)+(s&lt;&lt;<span class="hljs-number">3</span>)+(c-<span class="hljs-string">&#x27;0&#x27;</span>);c=<span class="hljs-built_in">getchar</span>();&#125;<br>    <span class="hljs-keyword">return</span> f*s;<br>&#125;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N=<span class="hljs-number">114514</span>;<br><span class="hljs-type">int</span> v[N],deep[N],son[N],siz[N],fa[N],top[N],id[N],val[N],cnt;<br>vector&lt;<span class="hljs-type">int</span>&gt; g[N];<br><span class="hljs-type">int</span> n,m,r,p;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs0</span><span class="hljs-params">(<span class="hljs-type">int</span> now,<span class="hljs-type">int</span> father)</span></span>&#123;<br>    deep[now]=deep[father]<span class="hljs-number">+1</span>;<br>    fa[now]=father;<br>    siz[now]=<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> &amp;i:g[now])&#123;<br>        <span class="hljs-keyword">if</span>(i==father)<span class="hljs-keyword">continue</span>;<br>        <span class="hljs-built_in">dfs0</span>(i,now);<br>        siz[now]+=siz[i];<br>        <span class="hljs-keyword">if</span>(siz[i]&gt;siz[son[now]])son[now]=i;<br>    &#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs1</span><span class="hljs-params">(<span class="hljs-type">int</span> now,<span class="hljs-type">int</span> tp)</span></span>&#123;<br>    top[now]=tp,id[now]=++cnt,val[id[now]]=v[now];<br>    <span class="hljs-keyword">if</span>(son[now]==<span class="hljs-number">0</span>)&#123;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-built_in">dfs1</span>(son[now],tp);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> &amp;i:g[now])&#123;<br>        <span class="hljs-keyword">if</span>(i==fa[now]||i==son[now])<span class="hljs-keyword">continue</span>;<br>        <span class="hljs-built_in">dfs1</span>(i,i);<br>    &#125;<br>&#125;<br><br><span class="hljs-type">int</span> tree[N*<span class="hljs-number">4</span>];<br><span class="hljs-type">int</span> tag[N*<span class="hljs-number">4</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pushup</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span></span>&#123;<br>    tree[u]=tree[u*<span class="hljs-number">2</span>]+tree[u*<span class="hljs-number">2</span><span class="hljs-number">+1</span>];<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> now,<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(l==r)&#123;tree[now]=val[l];<span class="hljs-keyword">return</span>;&#125;<br>    <span class="hljs-type">int</span> mid=l+r&gt;&gt;<span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">build</span>(now*<span class="hljs-number">2</span>,l,mid);<br>    <span class="hljs-built_in">build</span>(now*<span class="hljs-number">2</span><span class="hljs-number">+1</span>,mid<span class="hljs-number">+1</span>,r);<br>    <span class="hljs-built_in">pushup</span>(now);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">change</span><span class="hljs-params">(<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> len,<span class="hljs-type">int</span> val)</span></span>&#123;<br>    tag[x]+=val;<br>    tree[x]+=len*val;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pushdown</span><span class="hljs-params">(<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)</span></span>&#123;<br>    <span class="hljs-type">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">change</span>(x*<span class="hljs-number">2</span>,mid-l<span class="hljs-number">+1</span>,tag[x]);<br>    <span class="hljs-built_in">change</span>(x*<span class="hljs-number">2</span><span class="hljs-number">+1</span>,r-mid,tag[x]);<br>    tag[x]=<span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">update</span><span class="hljs-params">(<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> left,<span class="hljs-type">int</span> right,<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r,<span class="hljs-type">int</span> val)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(l&lt;=left&amp;&amp;right&lt;=r)&#123;      <br>        <span class="hljs-built_in">change</span>(x,right-left<span class="hljs-number">+1</span>,val);<br>    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(!(r&lt;left||right&lt;l))&#123;<br>        <span class="hljs-type">int</span> mid=(left+right)&gt;&gt;<span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">pushdown</span>(x,left,right);<br>        <span class="hljs-built_in">update</span>(x*<span class="hljs-number">2</span>,left,mid,l,r,val);<br>        <span class="hljs-built_in">update</span>(x*<span class="hljs-number">2</span><span class="hljs-number">+1</span>,mid<span class="hljs-number">+1</span>,right,l,r,val);<br>        <span class="hljs-built_in">pushup</span>(x);<br>    &#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> left,<span class="hljs-type">int</span> right,<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(l&lt;=left&amp;&amp;right&lt;=r)&#123;<br>        <span class="hljs-keyword">return</span> tree[x];<br>    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(!(r&lt;left||l&gt;right))&#123;<br>        <span class="hljs-type">int</span> mid=(left+right)&gt;&gt;<span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">pushdown</span>(x,left,right);<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">query</span>(x*<span class="hljs-number">2</span>,left,mid,l,r)+<span class="hljs-built_in">query</span>(x*<span class="hljs-number">2</span><span class="hljs-number">+1</span>,mid<span class="hljs-number">+1</span>,right,l,r);<br>    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">querypath</span><span class="hljs-params">(<span class="hljs-type">int</span> u,<span class="hljs-type">int</span> v)</span></span>&#123;<br>    <span class="hljs-type">int</span> ret=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span>(top[u]!=top[v])&#123;<br>        <span class="hljs-keyword">if</span>(deep[top[u]]&lt;deep[top[v]])<span class="hljs-built_in">swap</span>(u,v);<br>        ret=ret+<span class="hljs-built_in">query</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,cnt,id[top[u]],id[u]);<br>        u=fa[top[u]]; <br>    &#125;<br>    <span class="hljs-keyword">if</span>(deep[u]&lt;deep[v])<span class="hljs-built_in">swap</span>(u,v);<br>    ret=ret+<span class="hljs-built_in">query</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,cnt,id[v],id[u]);<br>    <span class="hljs-keyword">return</span> ret;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">querytree</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span></span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">query</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,cnt,id[u],id[u]+siz[u]<span class="hljs-number">-1</span>);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">updatepath</span><span class="hljs-params">(<span class="hljs-type">int</span> u,<span class="hljs-type">int</span> v,<span class="hljs-type">int</span> k)</span></span>&#123;<br>    <span class="hljs-keyword">while</span>(top[u]!=top[v])&#123;<br>        <span class="hljs-keyword">if</span>(deep[top[u]]&lt;deep[top[v]])<span class="hljs-built_in">swap</span>(u,v);<br>        <span class="hljs-built_in">update</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,cnt,id[top[u]],id[u],k);<br>        u=fa[top[u]];<br>    &#125;<br>    <span class="hljs-keyword">if</span>(deep[u]&lt;deep[v])<span class="hljs-built_in">swap</span>(u,v);<br>    <span class="hljs-built_in">update</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,cnt,id[v],id[u],k);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">updatetree</span><span class="hljs-params">(<span class="hljs-type">int</span> u,<span class="hljs-type">int</span> k)</span></span>&#123;<br>    <span class="hljs-built_in">update</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,cnt,id[u],id[u]+siz[u]<span class="hljs-number">-1</span>,k);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    n=<span class="hljs-built_in">read</span>(),m=<span class="hljs-built_in">read</span>(),r=<span class="hljs-built_in">read</span>(),p=<span class="hljs-built_in">read</span>();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)&#123;v[i]=<span class="hljs-built_in">read</span>();&#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;n;++i)&#123;<br>        <span class="hljs-type">int</span> u=<span class="hljs-built_in">read</span>(),v=<span class="hljs-built_in">read</span>();<br>        g[u].<span class="hljs-built_in">push_back</span>(v);<br>        g[v].<span class="hljs-built_in">push_back</span>(u);<br>    &#125;<br>    <span class="hljs-built_in">dfs0</span>(r,<span class="hljs-number">0</span>);<br>    <span class="hljs-built_in">dfs1</span>(r,r);<br>    <span class="hljs-built_in">build</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,n);<br>    <span class="hljs-keyword">while</span>(m--)&#123;<br>        <span class="hljs-type">int</span> op=<span class="hljs-built_in">read</span>();<br>        <span class="hljs-keyword">if</span>(op==<span class="hljs-number">1</span>)&#123;<br>            <span class="hljs-type">int</span> x=<span class="hljs-built_in">read</span>(),y=<span class="hljs-built_in">read</span>(),z=<span class="hljs-built_in">read</span>();<br>            <span class="hljs-built_in">updatepath</span>(x,y,z);<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(op==<span class="hljs-number">2</span>)&#123;<br>            <span class="hljs-type">int</span> x=<span class="hljs-built_in">read</span>(),y=<span class="hljs-built_in">read</span>();  <br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,<span class="hljs-built_in">querypath</span>(x,y)%p);<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(op==<span class="hljs-number">3</span>)&#123;<br>            <span class="hljs-type">int</span> x=<span class="hljs-built_in">read</span>(),z=<span class="hljs-built_in">read</span>();<br>            <span class="hljs-built_in">updatetree</span>(x,z);<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-type">int</span> x=<span class="hljs-built_in">read</span>();<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,<span class="hljs-built_in">querytree</span>(x)%p);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="4-6-时间复杂度分析">4.6 时间复杂度分析</h3>
+<p>前面的两次dfs,由于是每个点遍历一次,所以时间复杂度 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<p>每次对于进行路径的操作,在两个点跳到同一条重链上的过程中,由于重链的性质,一定不会跳超过 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>log</mi><mo>⁡</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span></span></span></span> 次.又因为每次跳的时候又会进行一次线段树的操作,时间复杂度 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>log</mi><mo>⁡</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>,所以每次进行路径操作的时间复杂度是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(\log^2 n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1484em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8984em;"><span style="top:-3.1473em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>.</p>
+<p>对于每次的子树操作,只需要进行一次线段树的操作,所以时间复杂度 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>log</mi><mo>⁡</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<p>由于需要进行 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span> 次操作,所以总时间复杂度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>m</mi><msup><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(m \log^2 n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1484em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8984em;"><span style="top:-3.1473em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h2 id="5-后记">5 后记</h2>
+<p>好长。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="print-no-link">#数据结构</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>树链剖分学习笔记</div>
+      <div>http://ljhljh1102,github.io/2024/07/13/树链剖分学习笔记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>1102</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月13日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/07/14/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E4%BC%98%E5%8C%96%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85/" title="单调队列优化多重背包">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">单调队列优化多重背包</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
